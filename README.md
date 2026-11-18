@@ -22,30 +22,30 @@ $$\frac{di_L}{dt} = \frac{D \cdot V_{in} - (1 - D) \cdot V}{L}$$
 $$\frac{dV}{dt} = \frac{(1 - D) \cdot i_L - \frac{V}{R}}{C}$$
 
 Where:
-* $i_L$: Inductor current
-* $V$: Output capacitor voltage magnitude
-* $D$: Converter duty cycle ($D \in [D_{\min}, D_{\max}]$)
-* $V_{in}$: Input DC rail voltage
-* $R$: Equivalent resistive load
-* $L = 1\text{ mH}$, $C = 220\,\mu\text{F} \text{ or } 1000\,\mu\text{F}$
+- $i_L$: Inductor current
+- $V$: Output capacitor voltage magnitude
+- $D$: Converter duty cycle ($D \in [D_{\min}, D_{\max}]$)
+- $V_{in}$: Input DC rail voltage
+- $R$: Equivalent resistive load
+- $L = 1\text{ mH}$, $C = 220\,\mu\text{F} \text{ or } 1000\,\mu\text{F}$
 
 ---
 
 ## 🏗️ Control Architectures
 
 ### 1. Single-Loop PI Controller with Feedforward & Anti-Windup
-* **Reference Trajectory:** Soft-start command to eliminate startup inrush current:
+- **Reference Trajectory:** Soft-start command to eliminate startup inrush current:
   $$V_{ref\_cmd}(t) = V_{ref} \cdot \min\left(\frac{t}{T_{soft}}, 1\right)$$
-* **Feedforward Term:** Computed from ideal buck-boost conversion ratio:
+- **Feedforward Term:** Computed from ideal buck-boost conversion ratio:
   $$D_{ff} = \frac{V_{ref\_cmd}}{V_{in} + V_{ref\_cmd}}$$
-* **PI Law & Anti-Windup:** Conditional integration halts integrator accumulation during control saturation to prevent windup overshoot.
+- **PI Law & Anti-Windup:** Conditional integration halts integrator accumulation during control saturation to prevent windup overshoot.
 
 ### 2. Two-Loop Cascade PI Architecture
-* **Outer Voltage Loop:**
+- **Outer Voltage Loop:**
   $$I_{ref} = \text{sat}\left(K_{pv} e_v(t) + K_{iv} \int e_v(t) \, dt, \, 0, \, I_{\max}\right)$$
-* **Inner Current Loop:**
+- **Inner Current Loop:**
   $$D = \text{sat}\left(D_{ff} + K_{pi} e_i(t) + K_{ii} \int e_i(t) \, dt, \, D_{\min}, \, D_{\max}\right)$$
-* Inherent hardware protection through current bounding ($I_{\max} = 10\text{ A}$) to protect switching semiconductor devices.
+- Inherent hardware protection through current bounding ($I_{\max} = 10\text{ A}$) to protect switching semiconductor devices.
 
 ---
 
@@ -69,3 +69,12 @@ Where:
 ├── PI_increse_capacitance.m   # Single-loop PI control with enhanced filter (C = 1000 uF)
 ├── cascade_pi.m               # Two-loop Cascade PI controller (Voltage + Current)
 └── README.md                  # Project documentation
+
+---
+
+🚀 How to Run
+Clone the repository:git clone [https://github.com/sachintha-thisara/buck-boost-converter-control.git](https://github.com/sachintha-thisara/buck-boost-converter-control.git)
+
+Open MATLAB and navigate to the repository directory.
+
+Run any simulation script:run('cascade_pi.m')
