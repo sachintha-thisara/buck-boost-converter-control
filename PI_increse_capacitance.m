@@ -6,15 +6,15 @@ close all;
 Vin1 = 12;
 Vin2 = 10;
 L = 1e-3;
-C = 1000e-6;    % C අගය 1000uF 
+C = 1000e-6;  
 R1 = 18;
 R2 = 9;
 Vref = 18;
 
-% --- කාලයන් වෙනස් කළා (Stable වීමට ඉඩ දීම සඳහා) ---
-tVin = 0.2;     % Input වෙනස් වීම 0.2s වලට පමා කළා
-tLoad = 0.4;    % Load වෙනස් වීම 0.4s වලට පමා කළා
-tEnd = 1.0;     % මුළු කාලය 1.0s කළා
+
+tVin = 0.2;    
+tLoad = 0.4;  
+tEnd = 1.0;     
 % ---------------------------------------------------
 
 %% 2. PI Controller Parameters
@@ -91,7 +91,7 @@ ylabel('Duty Cycle');
 title('PI Controller - Duty Cycle');
 
 %% 10. Performance Analysis
-% Initial region එක 0.15s දක්වා වෙනස් කළා
+
 initial_region = t >= 0.15 & t < tVin;
 V_initial = mean(V(initial_region));
 
