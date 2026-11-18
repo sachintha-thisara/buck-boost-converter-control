@@ -69,12 +69,3 @@ Where:
 ├── PI_increse_capacitance.m   # Single-loop PI control with enhanced filter (C = 1000 uF)
 ├── cascade_pi.m               # Two-loop Cascade PI controller (Voltage + Current)
 └── README.md                  # Project documentation
-
----
-
-🚀 How to Run
-Clone the repository:git clone [https://github.com/sachintha-thisara/buck-boost-converter-control.git](https://github.com/sachintha-thisara/buck-boost-converter-control.git)
-
-Open MATLAB and navigate to the repository directory.
-
-Run any simulation script:run('cascade_pi.m')
